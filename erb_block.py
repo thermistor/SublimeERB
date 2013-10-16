@@ -1,14 +1,14 @@
 import sublime, sublime_plugin
 import re
 
-ERB_BLOCKS = [['<%=', '%>'], ['<%', '%>'], ['<%-', '-%>'], ['<%=', '-%>'], ['<%#', '%>'], ['<%', '-%>']]
-ERB_REGEX = '<%(=?|-?|#?)\s{2}(-?)%>'
+ERB_BLOCKS = [['<%=', '%>'], ['<%', '%>'], ['<%#', '%>']]
+ERB_REGEX = '<%(=?|#?)\s{2}%>'
 
 # matches opening bracket that is not followed by the closing one
-ERB_OPENER_REGEX = '<%[\=\-\#]?(?!.*%>)'
+ERB_OPENER_REGEX = '<%[\=\#]?(?!.*%>)'
 # matches the closing bracket. I couldn't figure out a way to exclude preceeding
 # opening bracket, since Python only support fixed-width negative lookbehind
-ERB_CLOSER_REGEX = '-?%>'
+ERB_CLOSER_REGEX = '%>'
 
 class ErbCommand(sublime_plugin.TextCommand):
   def run(self, edit):
